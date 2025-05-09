@@ -1,5 +1,5 @@
-# Ignore s^pectrograms in the Data directory
-Data/MelSpec_test/
-Data/MelSpec_train/
-Data/MelSpec_train.zip
-Data/MelSpec_test.zip
+# Ignore spectrograms in the Data directory
+Data/MelSpecs_test/
+Data/MelSpecs_train/
+Data/MelSpecs_train.zip
+Data/MelSpecs_test.zip
