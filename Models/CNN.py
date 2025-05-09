@@ -9,7 +9,6 @@ class ConvNet(nn.Module):
         hidden_size_1=16,
         hidden_size_2=32,
         hidden_size_3=64,
-        hidden_size_4=128,
     ):
         super(ConvNet, self).__init__()
         self.layer1 = nn.Sequential(
