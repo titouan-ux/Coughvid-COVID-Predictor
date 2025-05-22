@@ -3,4 +3,10 @@ Data/MelSpecs_test/
 Data/MelSpecs_train/
 Data/MelSpecs_train.zip
 Data/MelSpecs_test.zip
+COVID_vs_Symp/Data/MelSpecs_covid_vs_symp_test.zip
+COVID_vs_Symp/Data/MelSpecs_covid_vs_symp_train.zip
+COVID_vs_Symp/Data/MelSpecs_covid_vs_symp_test/
+COVID_vs_Symp/Data/MelSpecs_covid_vs_symp_train/
+
+Data/MelSpecs_test.zip
 coughvid_env/
