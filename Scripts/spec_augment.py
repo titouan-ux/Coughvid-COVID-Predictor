@@ -64,8 +64,8 @@ def SpectAugment(waves_path, files, param_masking, mels_path, labels_path, mean_
         signal , sr = librosa.load(waves_path+fn)
         s_len = len(signal)
         
-        # Add zero padding to the signal if less than 156027 (~4.07 seconds)
-        # Remove from begining and the end if signal length is greater than 156027 (~4.07 seconds)
+        # Add zero padding to the signal if less than mean timing
+        # Remove from begining and the end if signal length is greater than mean timing
         if s_len < meanSignalLength:
                pad_len = meanSignalLength - s_len
                pad_rem = pad_len % 2
