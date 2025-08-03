@@ -3,11 +3,17 @@ import torch.nn as nn
 
 
 class CNN_LSTM(nn.Module):
-    def __init__(self, input_dim, lstm_hidden_size=128, lstm_layers=2, num_classes=1):
-        super().__init__()
+    def __init__(
+        self,
+        input_dim,
+        lstm_hidden_size=128, 
+        lstm_layers=2,
+        num_classes=1
+        ):
+        super(CNN_LSTM, self).__init__()
 
         cnn_input_channels, input_height, input_width = input_dim
-        # CNN layers
+
         self.layer1 = nn.Sequential(
             nn.Conv2d(cnn_input_channels, 16, kernel_size=2, stride=1, padding=1),
             nn.BatchNorm2d(16),
@@ -34,10 +40,10 @@ class CNN_LSTM(nn.Module):
 
         self.cnn = nn.Sequential(self.layer1, self.layer2, self.layer3)
 
-        # Infer feature size from dummy input to define LSTM input dimension
+        # Use a test input to calculate the flatten size for the LSTM layer 
         with torch.no_grad():
-            dummy = torch.zeros(1, cnn_input_channels, input_height, input_width)
-            feat = self.cnn(dummy)
+            test_input = torch.zeros(1, *input_dim)
+            feat = self.cnn(test_input)
             _, C, H, W = feat.shape
             self.lstm_input_size = H * C
             self.seq_len = W  # sequence length for LSTM
@@ -57,7 +63,7 @@ class CNN_LSTM(nn.Module):
             nn.Dropout(0.2),
             nn.Linear(lstm_hidden_size * 2, 100),
             nn.ReLU(),
-            nn.Dropout(0.3),
+            nn.Dropout(0.2),
             nn.Linear(100, num_classes),
         )
 
