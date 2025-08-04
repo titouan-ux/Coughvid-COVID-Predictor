@@ -20,3 +20,6 @@ The 3 models were tested in a first task of classifying healthy patient vs non-h
 
 However the most interesting and complex tasks was to actually clssify between symptomatic and COVID-19 patients. We only evaluated the CNN_LSTM_attention model. The performance is not incredible (AUC : 0.64 and max F1-score of 45%).  
 
+# References 
+This project was inspired by the paper "Attention-based hybrid CNN-LSTM and spectral data augmentation for COVID-19 diagnosis
+from cough sound"  by S. Hamdi et al.
