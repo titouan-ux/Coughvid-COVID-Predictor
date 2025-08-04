@@ -56,3 +56,58 @@ def pitchShift(metaDataPath, audioDataPath, augmentedSignals):
                 "PCM_24",
             )
             counter += 1
+
+# Pitch shifting modified for COVID-19 VS Symptomatic ===============================================================
+def pitchShift_covid_modified(metaDataPath, audioDataPath, augmentedSignals):
+
+    metaData = pd.read_csv(metaDataPath)
+
+    counter = 0
+    for index, row in metaData.iterrows():
+        fname = row["non_silent_name"]
+        if (index + 1) % 100 == 0:
+            print(fname, " ", str(index + 1), "/", str(metaData.shape[0]))
+        signal, sr = librosa.load(audioDataPath + fname)
+
+        # For COVID-19 samples
+        if row["label"] == "COVID-19":
+
+            # Save original audio
+            sf.write(
+                augmentedSignals + "sample{0}_{1}.wav".format(counter, 1),
+                signal,
+                sr,
+                "PCM_24",
+            )
+            counter += 1
+            # Pitch shift down 4 steps
+            pitch_shifting = librosa.effects.pitch_shift(y=signal, sr=sr, n_steps=-4)
+            # Save pitch shifted audio
+            sf.write(
+                augmentedSignals + "sample{0}_{1}.wav".format(counter, 1),
+                pitch_shifting,
+                sr,
+                "PCM_24",
+            )
+            counter += 1
+            # Pitch shift up 4 steps
+            pitch_shifting = librosa.effects.pitch_shift(y=signal, sr=sr, n_steps=4)
+            # Save pitch shifted audio
+            sf.write(
+                augmentedSignals + "sample{0}_{1}.wav".format(counter, 1),
+                pitch_shifting,
+                sr,
+                "PCM_24",
+            )
+            counter += 1
+
+        # For symptomatic samples
+        else:
+            # Only save original audio
+            sf.write(
+                augmentedSignals + "sample{0}_{1}.wav".format(counter, 0),
+                signal,
+                sr,
+                "PCM_24",
+            )
+            counter += 1
