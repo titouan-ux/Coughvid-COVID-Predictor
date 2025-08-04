@@ -73,5 +73,5 @@ class CNN_LSTM(nn.Module):
         feat = feat.permute(0, 3, 2, 1)  # N x W x H x C
         lstm_in = feat.reshape(N, W, H * C)
         lstm_out, _ = self.lstm(lstm_in)
-        last_t = lstm_out[:, -1, :]
+        last_t = lstm_out[:, -1, :] # Get the last time step output to use for classification
         return self.classifier(last_t)
